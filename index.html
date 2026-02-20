@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Verse of the Day</title>
+<style>
+body {
+  margin:0;
+  font-family: Georgia, serif;
+  background: linear-gradient(90deg,#0b1f2a,#2d5a63);
+  color: white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:180px;
+}
+.card {
+  text-align:center;
+  padding:25px;
+  width:100%;
+}
+.title {
+  color:#f4c542;
+  font-weight:bold;
+  letter-spacing:2px;
+  font-size:20px;
+}
+.verse {
+  margin-top:15px;
+  font-size:16px;
+}
+.reference {
+  margin-top:10px;
+  font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="title">✨ VERSE OF THE DAY ✨</div>
+  <div class="verse" id="verse">Loading...</div>
+  <div class="reference" id="reference"></div>
+</div>
+
+<script>
+fetch("https://beta.ourmanna.com/api/v1/get/?format=json&order=daily")
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById("verse").innerHTML =
+      `"${data.verse.details.text}"`;
+    document.getElementById("reference").innerHTML =
+      "— " + data.verse.details.reference;
+  });
+</script>
+
+</body>
+</html>
